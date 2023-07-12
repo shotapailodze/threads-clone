@@ -1,9 +1,9 @@
 import Thread from "./thread"
 
-const Feed = () => {
+const Feed = ({filteredThreads, user, setOpenPopUp, getThreads}) => {
     return (
       <div className="feed">
-        <Thread />
+        {filteredThreads?.map(filteredThreads => <Thread setOpenPopUp={setOpenPopUp} key={filteredThreads.id} user={user} filteredThreads={filteredThreads} getThreads={getThreads}/>)}
       </div>
     )
   }

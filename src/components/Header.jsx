@@ -1,24 +1,24 @@
 
-const Header = () => {
+const Header = ({user, viewThreadsFeed, setViewThreadsFeed}) => {
     return (
       <header>
         <div className="info-container">
           <div className="user-info-container">
-            <h1>Username</h1>
-            <p>Handle <span className="threads-info">threads.net</span></p>
+            <h1>{user.username}</h1>
+            <p>{user.handle}<span className="threads-info">threads.net</span></p>
           </div>
           <div className="img-container">
-            <img src="" alt="profile picture"/>
+            <img src={user.img} alt="profile picture"/>
           </div>
         </div>
-        <p>bio</p>
+        <p>{user.bio}</p>
         <div className="sub-info-container">
-          <p className="sub-text">X Followers • <a href="#">link</a></p>
+          <p className="sub-text">{user.followers.length} Followers • <a href={user.link}>{user.link.replace("https://www.", "")}</a></p>
         </div>
         <button className="primary" onClick={() => navigator.clipboard.writeText("URL")}>Share Profile</button>
         <div className="button-container">
-          <button className="current">Threads</button>
-          <button>Replies</button>
+          <button className={viewThreadsFeed ? "current": null} onClick={() => setViewThreadsFeed(true)}>Threads</button>
+          <button className={!viewThreadsFeed ? "current": null} onClick={() => setViewThreadsFeed(false)}>Replies</button>
         </div>
       </header>
     )
