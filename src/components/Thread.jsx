@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react"
 import moment from "moment"
 
 
-const Thread = ({user, filteredThreads, setOpenPopUp, getThreads}) => {
+const Thread = ({user, filteredThreads, setOpenPopUp, getThreads, setInteractingThread}) => {
 
   const timePassed = moment().startOf('day').fromNow(filteredThreads.timestamp)
 
   const handleClick = () => {
     setOpenPopUp(true)
+    setInteractingThread(filteredThreads)
   }
 
   const postLike = async() => {
@@ -25,7 +25,6 @@ const Thread = ({user, filteredThreads, setOpenPopUp, getThreads}) => {
         body: JSON.stringify(filteredThreads)
       })
       const result = await response.json()
-      console.log('Success', result);
       getThreads()
       } catch (error) {
         console.error(error)
